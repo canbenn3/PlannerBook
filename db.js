@@ -1,37 +1,39 @@
-// This file is in charge of writing and retrieving data from a text file.
-const fs = require("fs");
-
 class DB {
-  constructor(fileName) {
-    this.fileName = fileName;
-    this.data = {};
-    try {
-      const content = JSON.parse(fs.readFileSync(fileName, "utf-8"));
-      this.data = content;
-      console.log(this.data.event1);
-    } catch (error) {
-      console.log("error" + error);
-    }
+  constructor(filename) {
+    this.server = "http://localhost:8000/";
+    this.filename = filename;
+    this.db = this.getAll();
   }
 
-  retrieveById = (id) => {
-    if (this.data[id]) {
-      return this.data[id];
-    } else {
-      console.error(`${this.data.id} doesn't exist`);
+  getAll = () => {
+    const contents = fetch(this.server + this.filename).then((res) =>
+      res.json()
+    );
+    return contents;
+  };
+
+  get = (key) => {
+    if (this.db[key]) {
+      return this.db[key];
     }
+    return null;
   };
 
-  save = (id, input) => {
-    this.data[id] = input;
-    this.writeToDB();
+  put = (event) => {
+    this.db[event.key] = event;
+    this.save();
   };
 
-  writeToDB = () => {
-    fs.write(this.fileName, JSON.stringify(this.data), () => ({
-      code: 200,
-    }));
+  remove = (key) => {
+    if (this.get(key)) {
+      delete this.db[key];
+      this.save();
+      return true;
+    }
+    return false;
+  };
+
+  save = () => {
+    fetch(this.server + this.filename, this.db);
   };
 }
-
-module.exports = DB;

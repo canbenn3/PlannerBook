@@ -1,10 +1,9 @@
-// import DB from "./db";
-const DB = require("./db");
-
 const db = new DB("database.txt");
 
 const api = () => ({
-  retrieve: () => {},
+  get: (id) => {
+    db.get(id);
+  },
 
   save: (id, input) => {
     db.save(id, input);

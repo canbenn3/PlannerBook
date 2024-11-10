@@ -1,19 +1,11 @@
-const api = require("./calendarAPI");
 const input = document.getElementById("input-1");
 const submitBtn = document.getElementById("submit");
-const saveBtn = document.getElementById("save");
-const toDoList = document.getElementById("todo-list");
+const list = document.getElementById("todo-list");
+const save = document.getElementById("save");
 
-submitBtn.addEventListener("click", () => {
-  const newItem = input.value;
-  const newSpan = document.createElement("span");
-  newSpan.type = "checkbox";
-  const newDiv = document.createElement("div");
-
-  newSpan.innerHTML = newItem;
-
-  newDiv.appendChild(newSpan);
-  toDoList.appendChild(newDiv);
+submitBtn.addEventListener("click", (e) => {
+  const li = document.createElement("li");
+  li.innerHTML = input.value;
+  input.value = "";
+  list.insertAdjacentElement("beforeend", li);
 });
-
-saveBtn.addEventListener("click", () => {});
