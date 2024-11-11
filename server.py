@@ -2,11 +2,11 @@ import re
 import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-filename = "favs.txt"
+filename = "database.txt"
 
 class HTTPRequestHandler(BaseHTTPRequestHandler):
     def do_PUT(self):
-        if re.search('/api/update-favs', self.path):
+        if re.search('/api/update-events', self.path):
             length = int(self.headers.get('content-length'))
             data = self.rfile.read(length).decode('utf8')
 

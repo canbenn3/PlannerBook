@@ -2,14 +2,29 @@ class DB {
   constructor(filename) {
     this.server = "http://localhost:8000/";
     this.filename = filename;
-    this.db = this.getAll();
+    this.putAPI = "api/update-events";
+    this.db = null;
+    this.init();
   }
 
-  getAll = () => {
-    const contents = fetch(this.server + this.filename).then((res) =>
-      res.json()
-    );
-    return contents;
+  async init() {
+    try {
+      this.db = await this.getAll();
+      console.log("initialized; this.db: " + JSON.stringify(this.db));
+    } catch (error) {
+      console.error("Failed to load data:", error);
+      this.db = {};
+    }
+  }
+
+  getAll = async () => {
+    try {
+      const res = await fetch(this.server + this.filename);
+      const res_1 = await res.json();
+      return res_1;
+    } catch (error) {
+      return error;
+    }
   };
 
   get = (key) => {
@@ -21,19 +36,33 @@ class DB {
 
   put = (event) => {
     this.db[event.key] = event;
-    this.save();
   };
 
   remove = (key) => {
     if (this.get(key)) {
       delete this.db[key];
-      this.save();
       return true;
     }
     return false;
   };
 
-  save = () => {
-    fetch(this.server + this.filename, this.db);
+  save = async () => {
+    try {
+      const response = await fetch(this.server + this.putAPI, {
+        method: "PUT",
+        body: JSON.stringify(this.db),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save");
+      } else {
+        console.log("Data saved successfully");
+      }
+    } catch (error) {
+      console.log("Error saving data");
+    }
   };
 }

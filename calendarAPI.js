@@ -1,13 +1,32 @@
 const db = new DB("database.txt");
 
-const api = () => ({
-  get: (id) => {
-    db.get(id);
+const api = {
+  get: (item) => {
+    id = stringHash(item);
+    return db.get(id);
   },
 
-  save: (id, input) => {
-    db.save(id, input);
+  getAll: async () => {
+    const res = await db.getAll();
+    console.log(res);
+    return res;
   },
-});
 
-export default api;
+  put: (itemString) => {
+    const id = stringHash(itemString);
+    const event = {
+      key: id,
+      body: itemString,
+    };
+    db.put(event);
+  },
+
+  remove: (itemString) => {
+    const id = stringHash(itemString);
+    db.remove(id);
+  },
+
+  save: () => {
+    db.save();
+  },
+};
