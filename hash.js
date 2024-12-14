@@ -1,6 +1,6 @@
 stringHash = (string) => {
   if (typeof string !== "string") {
-    return undefined;
+    string = JSON.stringify(string);
   }
   let hash = 100;
   let offset = 0;

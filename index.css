@@ -1,0 +1,92 @@
+:root {
+    --social-color: #7DCE82;
+    --physical-color: #FF8360;
+    --intellectual-color: #E8E288;
+    --spiritual-color: #3CDBD3;
+
+    --primary: #473BF0;
+    --secondary: #F8C630;
+    --tertiary: #D6D6D6;
+    background-color: var(--tertiary);
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: var(--primary);
+    padding: 15px
+}
+
+h1 {
+    font-size: 3em;
+    color: var(--tertiary);
+}
+
+h1 > span {
+    color: var(--secondary);
+}
+
+h2 {
+    padding: 5px;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+a {
+    color: var(--tertiary);
+}
+
+main {
+    padding-top: 200px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+    gap: 5px;
+}
+
+.grid > div {
+    border: solid 1px black;
+
+}
+
+.social{
+    background-color: var(--social-color);
+}
+
+.physical {
+    background-color: var(--physical-color);
+}
+
+.intellectual {
+    background-color: var(--intellectual-color);
+}
+
+.spiritual {
+    background-color: var(--spiritual-color);
+}
+
+.goal-head {
+    background-color: rgba(0, 0, 0, .12);
+    display: flex;
+    justify-content: space-between;
+}
+
+.goal-head > button {
+    background-color: transparent;
+    border: none;
+}
+
+.goal[data-open="true"] {
+    z-index: 1;
+    width: 500px;
+    height:700px;
+}
