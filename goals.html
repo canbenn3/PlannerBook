@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="index.css" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add,edit"
     />
     <script src="goals.js" defer></script>
   </head>
@@ -20,7 +20,7 @@
 
     <main>
       <div class="grid">
-        <div id="social-goals" class="social goal" data-open="false">
+        <div id="social-goals" class="social goal">
           <div class="goal-head">
             <h2>Social</h2>
             <button class="add">
@@ -28,7 +28,7 @@
             </button>
           </div>
         </div>
-        <div id="physical-goals" class="physical goal" data-open="false">
+        <div id="physical-goals" class="physical goal">
           <div class="goal-head">
             <h2>Physical</h2>
             <button class="add">
@@ -36,7 +36,7 @@
             </button>
           </div>
         </div>
-        <div id="intellectual-goals" class="intellectual goal" data-open="false">
+        <div id="intellectual-goals" class="intellectual goal">
           <div class="goal-head">
             <h2>Intellectual</h2>
             <button class="add">
@@ -44,13 +44,59 @@
             </button>
           </div>
         </div>
-        <div id="spritual-goals" class="spiritual goal" data-open="false">
+        <div id="spiritual-goals" class="spiritual goal">
           <div class="goal-head">
             <h2>Spiritual</h2>
             <button class="add">
               <span class="material-symbols-outlined">add</span>
             </button>
           </div>
+        </div>
+      </div>
+
+      <div id="mask" data-open="false"></div>
+      <div id="social-modal" class="social modal" data-open="false">
+        <div class="goal-head">
+          <h2>Social</h2>
+          <button class="material-symbols-outlined edit">edit</button>
+        </div>
+        <div class="goal-list">
+          <p>
+            You have no current goals set... press the edit button to add some!
+          </p>
+        </div>
+      </div>
+      <div id="physical-modal" class="physical modal" data-open="false">
+        <div class="goal-head">
+          <h2>Social</h2>
+          <button class="material-symbols-outlined edit">edit</button>
+        </div>
+        <div class="goal-list">
+          <p>
+            You have no current goals set... press the edit button to add some!
+          </p>
+        </div>
+      </div>
+      <div id="intellectual-modal" class="intellectual modal" data-open="false">
+        <div class="goal-head">
+          <h2>Social</h2>
+          <button class="material-symbols-outlined edit">edit</button>
+        </div>
+        <div class="goal-list">
+          <p>
+            You have no current goals set... press the edit button to add some!
+          </p>
+        </div>
+      </div>
+      <div id="spiritual-modal" class="spiritual modal" data-open="false">
+        <div class="goal-head">
+          <h2>Social</h2>
+          <button class="material-symbols-outlined edit">edit</button>
+        </div>
+        <div class="goal-list">
+          <p>
+            You have no current goals set... press the edit button to add some!
+          </p>
         </div>
       </div>
     </main>

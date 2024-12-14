@@ -78,6 +78,7 @@ main {
     background-color: rgba(0, 0, 0, .12);
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
 
 .goal-head > button {
@@ -85,8 +86,37 @@ main {
     border: none;
 }
 
-.goal[data-open="true"] {
+.modal {
+    position: fixed;
+    opacity: 0;
+    top: 9vh;
+    bottom: 11vh;
+    z-index: 2;
+    transition: all .25s ease;
+    border-radius: 10px;
+}
+
+.modal[data-open="true"] {
+    opacity: 1;
+    top: 10vh;
+    bottom: 10vh;
+    right: 10vw;
+    left: 10vw;
+}
+
+#mask {
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
     z-index: 1;
-    width: 500px;
-    height:700px;
+    top:0px;
+    left: 0px;
+}
+
+#mask[data-open="true"] {
+    bottom: 0px;
+    right: 0px;
+}
+
+.goal-list {
+    padding: 10px;
 }
