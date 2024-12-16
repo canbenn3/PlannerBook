@@ -41,7 +41,7 @@ if __name__ == '__main__':
         title TEXT NOT NULL,
         category TEXT NOT NULL,
         progress TEXT,
-        steps TEXT,
+        tasks TEXT,
         events TEXT
     )
     """
