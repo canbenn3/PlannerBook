@@ -6,6 +6,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add,edit"
     />
+    <script src="Api.js" defer></script>
     <script src="goals.js" defer></script>
   </head>
   <body>
@@ -61,42 +62,73 @@
           <button class="material-symbols-outlined edit">edit</button>
         </div>
         <div class="goal-list">
-          <p>
-            You have no current goals set... press the edit button to add some!
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Date</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody id="social-list"></tbody>
+          </table>
         </div>
       </div>
+
       <div id="physical-modal" class="physical modal" data-open="false">
         <div class="goal-head">
           <h2>Social</h2>
           <button class="material-symbols-outlined edit">edit</button>
         </div>
         <div class="goal-list">
-          <p>
-            You have no current goals set... press the edit button to add some!
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Date</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody id="physical-list"></tbody>
+          </table>
         </div>
       </div>
+
       <div id="intellectual-modal" class="intellectual modal" data-open="false">
         <div class="goal-head">
           <h2>Social</h2>
           <button class="material-symbols-outlined edit">edit</button>
         </div>
         <div class="goal-list">
-          <p>
-            You have no current goals set... press the edit button to add some!
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Date</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody id="intellectual-list"></tbody>
+          </table>
         </div>
       </div>
+
       <div id="spiritual-modal" class="spiritual modal" data-open="false">
         <div class="goal-head">
           <h2>Social</h2>
           <button class="material-symbols-outlined edit">edit</button>
         </div>
         <div class="goal-list">
-          <p>
-            You have no current goals set... press the edit button to add some!
-          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Date</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody id="spiritual-list"></tbody>
+          </table>
         </div>
       </div>
     </main>

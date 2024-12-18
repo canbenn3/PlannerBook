@@ -62,10 +62,10 @@ def read_query(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
 
-def insert_goal_query(connection, id, date, title, category):
+def insert_goal_query(connection, options):
     query = f"""
-    INSERT INTO goals (goal_id, end_date, title, category)
-    VALUES ({id}, {date}, {title}, {category})
+    INSERT INTO goals
+    VALUES ({options})
     """
     execute_query(connection, query)
 
@@ -84,6 +84,27 @@ def delete_goal_query(connection, id):
     """
     execute_query(connection, query)
 
+def fetch_goal_query(connection, id):
+    query = f"""
+    SELECT * FROM goals
+    WHERE goal_id = {id}
+    """
+    return read_query(connection, query)
+
+def fetch_goal_category(connection, category):
+    query = f"""
+    SELECT * FROM goals
+    WHERE category={category}
+    """
+    return read_query(connection, query)
+
+def fetch_all_goals(connection):
+    query = f"""
+    SELECT * FROM goals;
+    """
+    return read_query(connection, query)
+
+
 def insert_event_query(connection, options):
     query=f"""
     INSERT INTO events
@@ -99,12 +120,12 @@ def update_event_query(connection, id, options):
     """
     execute_query(connection, query)
 
-def fetch_goal_query(connection, id):
+def delete_event_query(connection, id):
     query = f"""
-    SELECT * FROM goals
-    WHERE goal_id = {id}
+    DELETE FROM events
+    WHERE event_id = {id}
     """
-    return read_query(connection, query)
+    execute_query(connection, query)
 
 def fetch_event_query(connection, id):
     query = f"""
@@ -113,24 +134,39 @@ def fetch_event_query(connection, id):
     """
     return read_query(connection, query)
 
-def delete_event_query(connection, id):
+def fetch_event_category(connection, category):
     query = f"""
-    DELETE FROM events
-    WHERE event_id = {id}
+    SELECT * FROM events
+    WHERE category={category}
     """
-    execute_query(connection, query)
+    return read_query(connection, query)
+
+def fetch_all_events(connection):
+    query = """
+    SELECT * FROM events
+    """
+    return read_query(connection, query)
+
+
 
 if __name__ == '__main__':
     # Test the functions!
     connection = create_db_connection("localhost", USER, PW, DB_NAME)
     # Test goals:
     print("---- Testing Goals DB Management ----")
-    id = 1
-    date = "'2024-12-16'"
-    title = "'Build PlannerBook!'"
-    category = "'intellectual'"
+    id = 5
+    date = "'2025-12-30'"
+    title = "'Bench press 500 lbs'"
+    category = "'physical'"
 
-    insert_goal_query(connection, id, date, title, category)
+    options = f"""
+    {id},
+    {date},
+    {title},
+    {category},
+    """
+    options += "'{total: 2, completed: 1, percent_complete: .5, overdue: 0}', '[]', '[]'"
+    insert_goal_query(connection, options)
     result1 = fetch_goal_query(connection, id)
     print("Result1 from insert and fetch number 1:\n" + str(result1))
 
@@ -143,9 +179,9 @@ if __name__ == '__main__':
     result2 = fetch_goal_query(connection, id)
     print("Result2 from update and fetch number 2:\n" + str(result2))
 
-    delete_goal_query(connection, id)
-    result3 = fetch_goal_query(connection, id)
-    print("Result3 from delete and fetch number 3:\n" + str(result3))
+    # delete_goal_query(connection, id)
+    # result3 = fetch_goal_query(connection, id)
+    # print("Result3 from delete and fetch number 3:\n" + str(result3))
 
     print("\n\n\n\n")
 
@@ -179,6 +215,6 @@ if __name__ == '__main__':
     result = fetch_event_query(connection, id)
     print("Event results after update: " + str(result))
 
-    delete_event_query(connection, id)
-    result = fetch_event_query(connection, id)
-    print("Event results after Deletion: " + str(result))
+    # delete_event_query(connection, id)
+    # result = fetch_event_query(connection, id)
+    # print("Event results after Deletion: " + str(result))

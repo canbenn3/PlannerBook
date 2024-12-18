@@ -120,3 +120,7 @@ main {
 .goal-list {
     padding: 10px;
 }
+
+table {
+    width: 100%;
+}
