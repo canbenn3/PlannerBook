@@ -107,9 +107,9 @@ class Api {
           end_date: buffer[i][1],
           title: buffer[i][2],
           category: buffer[i][3],
-          progress: buffer[i][4],
-          tasks: buffer[i][5],
-          events: buffer[i][6],
+          progress: JSON.parse(buffer[i][4].replace(/(\w+):/g, '"$1":')),
+          tasks: JSON.parse(buffer[i][5].replace(/(\w+):/g, '"$1":')),
+          events: JSON.parse(buffer[i][6]),
         });
       }
       return results;

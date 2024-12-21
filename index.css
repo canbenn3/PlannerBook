@@ -86,11 +86,64 @@ main {
     border: none;
 }
 
+.darker-row {
+    background-color: rgba(0, 0, 0, .12);
+}
+
+.edit {
+    background-color: transparent;
+    border: none;
+    width: 5%;
+}
+
+.add-goal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+
+.dropdown {
+    background-color: transparent;
+    transform-origin: 50% 50%;
+    border: none;
+    width: 35px;
+    height: 35px;
+    transform: rotate(-90deg);
+    transition: all .25s ease;
+}
+
+.dropdown[data-open="true"] {
+    transform: rotate(0deg);
+}
+
+.goal-section {
+    width: 60%;
+}
+
+.date-section {
+    width: 20%;
+}
+
+.progress-section {
+    width: 10%;
+}
+
+.row {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
 .modal {
     position: fixed;
-    opacity: 0;
-    top: 9vh;
-    bottom: 11vh;
+    opacity: 1;
+    top: -50vh;
+    bottom: 150vh;
+    width: 0px;
     z-index: 2;
     transition: all .25s ease;
     border-radius: 10px;
@@ -98,10 +151,12 @@ main {
 
 .modal[data-open="true"] {
     opacity: 1;
+    width: auto;
     top: 10vh;
     bottom: 10vh;
     right: 10vw;
     left: 10vw;
+    overflow: hidden;
 }
 
 #mask {
@@ -121,6 +176,10 @@ main {
     padding: 10px;
 }
 
-table {
-    width: 100%;
+.t-body {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,.12) transparent;
+    height: 65%;
 }
+

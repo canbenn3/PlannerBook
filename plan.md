@@ -22,7 +22,7 @@
   - Social, intellectual, physical, and spiritual Goal sections
   - [ ] Goals can be entered or saved.
   - [ ] Goals have progress bars
-  - [ ] Clicking on a goal brings up a modal with more details
+  - [ ] Clicking on a goal opens a dropdown with more details
 
 - [ ] Day calendar page:
 
@@ -51,42 +51,12 @@
     - total num tasks overdue
     - total tasks remaining
     - list of first 10 tasks: button to view all tasks
-
-- [ ] DataBase
-  - Probably trickiest part of the project.
-  - Need to be able to store goals _and_ events
-  - Potential format:
-  - ```
-  // Format for overall DB:
-  {goals: {...}, events: {...}}
-  ```
-  - This format allows for one storage location with different intersections of the DB
-  - goals format:
-  -```
-  goals: {
-    social: {},
-    physical: {},
-    intellectual: {},
-    spiritual: {},
-  }
-  ```
-  - This format allows us to access each individual category so that we can display them all in one place with minimal searching.
-  - Format for individual goals:
-  - ```
-  goal-type: {
-    goalId: {
-        title: string,
-        progress: {total: int, completed: int, percent: int between 0-1},
-        steps: {stepId1: {}, stepId2: {}, ...},
-        events: {eventId1: }
-    }
-  }
-  ```
-  - This format allows all of our goal data to be stored in one place
-
-
-{goals: {goalId: {
-    title: string,
-    events: {eventId1: events[eventId1]}
-}}, events: {eventId1: {date: string, title: string}}}
     
+
+#### Design
+- [ ] GoalManager class
+  - Provide a table with all the goals of an associated category
+  - Each table row can be expanded with a drop-down box to display all of the goals info
+  - Add another goal to the database
+  - Edit a goal within the database
+  - Delete a goal from the database
