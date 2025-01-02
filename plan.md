@@ -58,5 +58,86 @@
   - Provide a table with all the goals of an associated category
   - Each table row can be expanded with a drop-down box to display all of the goals info
   - Add another goal to the database
-  - Edit a goal within the database
+  - Update a goal within the database
+    - ```
+      updateTasks = (id, taskList) => () => {api.updateGoal(id, taskList)}
+      ```
+    - This format allows for id and taskList to be passed in directly as a part of updateTasks rather than separately into each TaskRow.
   - Delete a goal from the database
+
+- [ ] TaskRow (GoalManager subclass)
+  - param: task object, update function
+    - update function is updateTasks from GoalManager class
+  - Methods:
+    - constructor:
+      - ```
+        constructor(taskObj, updateFcn) {
+          create row and btnContainer, goal, date, and progress sections as DOM elements
+          do the same for edit, save, and cancel buttons, add event listeners
+          this.taskObj = taskObj
+          this.updateFcn = updateFcn
+        }
+        ```
+
+    - buildRow
+      - Format:
+      - ```
+        buildRow = () => {
+          insert editBtn into btnContainer
+          add an event listener to the checkbox("click", () => changeCompleted())
+          append btnContainer, goal, date, and progress sections (in that order) to row.
+          set the innerHTML of each section according to taskObj's respective value
+          set checkbox.checked as true if taskObj.complete === true
+          return row
+        }
+        ```
+
+    - doEdit:
+      - Changes the row into a series of inputs
+      - edit button becomes a 'cancel' and a 'save' button
+        - 'cancel' returns the row to it's original state
+        - 'save' updates the inputted 'task object' then calls updateTasks() through 'saveChanges'
+      - All other sections (besides checkbox) becomes an input with the initial value of whatever was there previously.
+      - ```
+        doEdit = () => {
+          clear event listener on checkbox
+          clear innerHTML of goal, date, and btnContainer sections
+          Place input box in goal and date sections
+          Place cancel and save buttons into btnContainer
+        }
+        ```
+
+    - saveChanges: 
+      - called when save button clicked
+        - ```
+          saveChanges = () => {
+            if (!this.goalSection.firstChild.value) {
+              return;
+            }
+            newTask = {
+              name: this.goalSection.firstChild.value
+              date: this.dateSection.firstChild.value
+              complete: this.dateSection.firstChild.checked
+            }
+            this.taskObj = newTask;
+            updateFcn();
+          }
+          ```
+
+    - cancelChanges: 
+      - Called when cancel button clicked
+      - ```
+        cancelChanges = () => {
+          clear innerHTML of btnContainer, goal, date, and progress sections
+          buildRow();
+        }
+        ```
+
+    - changeCompleted:
+      - Called when checkbox is clicked
+      - ```
+        changeCompleted = () => {
+          this.taskObj.complete = this.checkbox.checked
+          updateFcn();
+        }
+        ```
