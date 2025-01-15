@@ -90,12 +90,6 @@ main {
     background-color: rgba(0, 0, 0, .12);
 }
 
-.edit {
-    background-color: transparent;
-    border: none;
-    width: 5%;
-}
-
 .add-goal {
     display: flex;
     align-items: center;
@@ -105,14 +99,28 @@ main {
     width: 100%;
 }
 
-.dropdown {
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container > button {
     background-color: transparent;
     transform-origin: 50% 50%;
     border: none;
+    border-radius: 50%;
     width: 35px;
     height: 35px;
-    transform: rotate(-90deg);
     transition: all .25s ease;
+}
+
+.btn-container > button:hover {
+    background-color: rgba(0, 0, 0, .12);
+    border-radius: 50%;
+}
+
+.dropdown {
+    transform: rotate(-90deg);
 }
 
 .dropdown[data-open="true"] {

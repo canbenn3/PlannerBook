@@ -51,28 +51,102 @@
     - total num tasks overdue
     - total tasks remaining
     - list of first 10 tasks: button to view all tasks
-    
 
 #### Design
-- [ ] GoalManager class
+
+### GoalManager class
   - Provide a table with all the goals of an associated category
   - Each table row can be expanded with a drop-down box to display all of the goals info
   - Add another goal to the database
   - Update a goal within the database
     - ```
-      updateTasks = (id, taskList) => () => {api.updateGoal(id, taskList)}
+      updateGoal = (id) => (goalObj) => {api.updateGoal(id, goalObj)}
+      ```
+    - ```
+      updateTasks = (id, goalObj) => (taskList) => {
+        goalObj.tasks = taskList;
+        api.updateGoal(id, goalObj)
+        }
       ```
     - This format allows for id and taskList to be passed in directly as a part of updateTasks rather than separately into each TaskRow.
   - Delete a goal from the database
 
-- [ ] TaskRow (GoalManager subclass)
+### GoalRow class
+  - param: goal object, update function, isDark boolean.
+  - idea: Create a goal row with edit, dropdown, title, date, and progress sections.
+  - Methods:
+    - constructor:
+      - ```
+        constructor(goalObj, updateFcn) {
+          // the purpose of the constructor is to establish EVERY element. All other methods control visibility.
+          create row, btnContainer, goal, date, and progress sections as DOM elements
+          do same for edit, save, dropdown, and cancel buttons
+          Create two input elements, one for goaltitle and one for the date
+          add event listeners for everything
+          this.goalObj = goalObj;
+          this.updateFcn = updateFcn;
+          append btnContainer, goal title, date, and progress sections to this.row
+
+        }
+        ```
+
+    - buildRow:
+      - ```
+        buildRow() {
+          goalelement.innerHTML = this.goalObj.title;
+          dateelement.innerHTML = this.goalObj.end_date;
+          progresselement.innerHTML = this.goalObj.progress.completed / this.goalObj.progress.total;
+
+          btnContainer.innerHTML = ""
+          append edit and dropdown buttons into btnContainer.
+        }
+        ```
+
+    - doEdit:
+      - ```
+        doEdit = () => {
+          // Event handler for edit button
+          clear btnContainer
+          append save and cancel buttons to btnContainer.
+
+          clear goal and date sections
+          append the goal and date input fields into their proper sections.
+          set initial value of input fields to goalObj's original values.
+          // Note: doSave and doCancel handle the closing of doEdit
+        }
+        ```
+
+    - doSave:
+      - ```
+        doSave = () => {
+          // Note: This method is the event handler for a click on the save button.
+
+          this.goalObj.title = goalInput.value;
+          this.goalObj.end_date = dateInput.value;
+          updateFcn()
+          buildRow();
+        }
+        ```
+    - doCancel:
+      - ```
+        doCancel = () => {
+          buildRow();
+        }
+        ```
+    - doDropDown:
+      - ```
+
+        ```
+
+### TaskRow class
+
   - param: task object, update function
     - update function is updateTasks from GoalManager class
   - Methods:
     - constructor:
       - ```
         constructor(taskObj, updateFcn) {
-          create row and btnContainer, goal, date, and progress sections as DOM elements
+          create row and btnContainer, task, date, and progress sections as DOM elements
           do the same for edit, save, and cancel buttons, add event listeners
           this.taskObj = taskObj
           this.updateFcn = updateFcn
@@ -107,7 +181,7 @@
         }
         ```
 
-    - saveChanges: 
+    - saveChanges:
       - called when save button clicked
         - ```
           saveChanges = () => {
@@ -124,7 +198,7 @@
           }
           ```
 
-    - cancelChanges: 
+    - cancelChanges:
       - Called when cancel button clicked
       - ```
         cancelChanges = () => {
