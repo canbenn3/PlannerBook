@@ -39,9 +39,10 @@ class Api {
     }
   };
 
-  updateGoal = async (goalId, updateObj) => {
+  updateGoal = async (updateObj) => {
     try {
-      const upload = { goalId: goalId, ...updateObj };
+
+      const upload = { ...updateObj };
       const response = await fetch(this.server + this.goalPaths.update, {
         method: "PATCH",
         body: JSON.stringify(upload),

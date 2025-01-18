@@ -10,10 +10,10 @@ for (let btn of addBtns) {
     const category = section.parentElement.id;
     const type = category.split("-")[0];
     current = type;
-    goalManager = new GoalManager(current);
     const tBody = document.getElementById(`${current}-list`);
+    goalManager = new GoalManager(current, tBody);
     tBody.innerHTML = "";
-    goalManager.buildTable(tBody);
+    goalManager.buildTable();
     document.getElementById(`${type}-modal`).dataset.open = true;
     mask.dataset.open = "true";
   });

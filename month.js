@@ -44,15 +44,20 @@ getCategory.addEventListener("click", async () => {
 });
 
 update.addEventListener("click", () => {
-  const goalId = 1001020;
-  const updateObj = {
+  goalObj = {
+    goal_id: 1001020,
+    end_date: "2024-12-25",
+    title: "Run a marathon",
+    category: "physical",
     progress: { total: 2, completed: 0, percent_complete: 0, overdue: 0 },
     tasks: [
-      { task_name: "add", end_date: "2024-12-25", complete: false },
-      { task_name: "get", end_date: "2024-12-25", complete: false },
+      { task_name: "add", end_date: "2024-12-25", complete: "false" },
+      { task_name: "get", end_date: "2024-12-25", complete: "false" },
     ],
+    events: [],
   };
-  api.updateGoal(goalId, updateObj);
+
+  api.updateGoal(goalObj);
 });
 
 remove.addEventListener("click", () => {

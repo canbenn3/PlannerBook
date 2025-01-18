@@ -32,8 +32,8 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
             length = int(self.headers.get('content-length'))
             data = self.rfile.read(length).decode('utf-8')
             jObj = json.loads(data)
-            id = jObj["goalId"]
-            del jObj["goalId"]
+            id = jObj["goal_id"]
+            del jObj["goal_id"]
             options = ""
             for key in jObj:
                 value = str(jObj[key]).replace("'", '"')

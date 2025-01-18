@@ -1,5 +1,6 @@
 class GoalRow {
   constructor(goalObj, updateFcn, isDark) {
+    this.api = new Api();
     this.goalObj = goalObj;
     this.updateFcn = updateFcn;
     this.isDark = isDark;
@@ -56,6 +57,9 @@ class GoalRow {
 
     this.btnContainer.innerHTML = "";
     this.btnContainer.append(this.editBtn, this.dropdownBtn);
+    if (this.goalObj.goal_id === null) {
+      this.#doEdit();
+    }
     return this.row;
   };
 
@@ -75,13 +79,28 @@ class GoalRow {
   #doSave = () => {
     // event handler for save btn
     this.goalObj.title = this.goalInput.value;
+
     this.goalObj.end_date = this.dateInput.value;
-    this.updateFcn(this.goalObj);
-    this.buildRow();
+    if (!this.#isInvalid()) {
+      this.updateFcn(this.goalObj);
+      this.buildRow();
+    }
   };
 
   #doCancel = () => {
-    this.buildRow();
+    if (this.goalObj.goal_id || !this.#isInvalid()) {
+      this.buildRow();
+    }
+  };
+
+  #isInvalid = () => {
+    if (!this.goalInput.value || !this.goalInput.value) {
+      const tBody = this.row.parentElement;
+      tBody.removeChild(this.row);
+      this.api.deleteGoal(this.goalObj.goal_id);
+      return true;
+    }
+    return false;
   };
 
   #doDropdown = () => {
@@ -98,7 +117,8 @@ class GoalRow {
 
     let taskrow;
     let updateTasks = () => {
-      updateTasks(this.goalObj);
+      this.updateFcn(this.goalObj);
+      this.progressSection.textContent = `${this.goalObj.progress.completed} / ${this.goalObj.progress.total}`;
     };
     for (let task of this.goalObj.tasks) {
       taskrow = new TaskRow(task, updateTasks, this.isDark);
@@ -110,5 +130,4 @@ class GoalRow {
     this.dropdownBtn.dataset.open = "false";
     this.taskList.innerHTML = "";
   };
-
 }

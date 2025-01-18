@@ -29,9 +29,19 @@ class TaskRow {
 
     this.taskInput = document.createElement("input");
     this.dateInput = document.createElement("input");
+
     this.edit = document.createElement("button");
+    this.edit.classList.add("material-symbols-outlined", "edit");
+    this.edit.textContent = "edit";
+
     this.save = document.createElement("button");
+    this.save.classList.add("material-symbols-outlined", "save");
+    this.save.textContent = "check";
+
     this.cancel = document.createElement("button");
+    this.cancel.classList.add("material-symbols-outlined", "cancel");
+    this.cancel.textContent = "close";
+
     this.edit.addEventListener("click", () => this.#doEdit());
     this.save.addEventListener("click", () => this.#doSave());
     this.cancel.addEventListener("click", () => this.#doCancel());
@@ -48,18 +58,38 @@ class TaskRow {
   };
 
   #doEdit = () => {
-    console.log("TODO: #doEdit");
+    this.btnContainer.innerHTML = "";
+    this.btnContainer.append(this.save, this.cancel);
+    this.#redoCheckbox();
+
+    this.taskSection.innerHTML = "";
+    this.dateSection.innerHTML = "";
+    this.taskInput.value = this.taskObj.task_name;
+    this.dateInput.value = this.taskObj.end_date;
+    this.taskSection.append(this.taskInput);
+    this.dateSection.append(this.dateInput);
   };
 
   #doSave = () => {
-    console.log("TODO: #doSave");
+    this.taskObj.task_name = this.taskInput.value;
+    this.taskObj.end_date = this.dateInput.value;
+    this.taskObj.complete = this.checkbox.checked ? "true" : "false";
+    console.log("checkbox:", this.checkbox);
+    this.updateFcn();
+    this.buildRow();
   };
 
   #doCancel = () => {
-    console.log("TODO: #doCancel");
+    this.buildRow();
   };
 
   #doCheck = () => {
-    console.log("TODO: #doCheck");
+    this.taskObj.complete = this.checkbox.checked ? "true" : "false";
+    this.updateFcn();
+    this.buildRow();
+  };
+
+  #redoCheckbox = () => {
+    this.checkbox.replaceWith(this.checkbox.cloneNode(true));
   };
 }
